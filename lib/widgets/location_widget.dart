@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/widgets.dart';
 import 'package:location_ui_design/model/location.dart';
+import 'package:location_ui_design/page/detail_page.dart';
 
 import 'expanded_content_widget.dart';
 import 'image_widget.dart';
@@ -37,13 +39,39 @@ class _LocationWidgetState extends State<LocationWidget> {
             bottom: isExpanded ? 150 : 100,
             child: GestureDetector(
               onPanUpdate: onPanUpdate,
-              onTap: () {},
+              onTap: openDetailPage,
               child: ImageWidget(location: widget.location),
             ),
           ),
         ],
       ),
     );
+  }
+
+  void openDetailPage() {
+    if (!isExpanded) {
+      setState(() {
+        isExpanded = true;
+      });
+      return;
+    }
+
+    Navigator.of(context).push(PageRouteBuilder(
+        transitionDuration: Duration(seconds: 1),
+        reverseTransitionDuration: Duration(seconds: 1),
+        pageBuilder: (context, animation, secondaryAnimation) {
+          final curvedAnimation = CurvedAnimation(
+            parent: animation,
+            curve: Interval(0, 0.5),
+          );
+          return FadeTransition(
+            opacity: curvedAnimation,
+            child: DetailPage(
+              location: widget.location,
+              animation: animation,
+            ),
+          );
+        }));
   }
 
   void onPanUpdate(DragUpdateDetails details) {

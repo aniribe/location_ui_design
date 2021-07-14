@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:location_ui_design/data/hero_tag.dart';
 import 'package:location_ui_design/model/location.dart';
 
+import 'hero_widget.dart';
 import 'lat_long_widget.dart';
 
 class ImageWidget extends StatelessWidget {
@@ -44,9 +46,12 @@ class ImageWidget extends StatelessWidget {
   }
 
   Widget buildImage() => SizedBox.expand(
-        child: ClipRRect(
-          borderRadius: BorderRadius.all(Radius.circular(8)),
-          child: Image.asset(location.urlImage, fit: BoxFit.cover),
+        child: HeroWidget(
+          tag: HeroTag.image(location.urlImage),
+          child: ClipRRect(
+            borderRadius: BorderRadius.all(Radius.circular(8)),
+            child: Image.asset(location.urlImage, fit: BoxFit.cover),
+          ),
         ),
       );
 
