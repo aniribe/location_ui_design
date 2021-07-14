@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:location_ui_design/widgets/locations_widget.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -8,6 +9,7 @@ class HomePage extends StatelessWidget {
       backgroundColor: Colors.blueGrey,
       appBar: buildAppBar(),
       bottomNavigationBar: BuildBottomNavigationBar(),
+      body: LocationsWidget(),
     );
   }
 }
@@ -40,11 +42,9 @@ class BuildBottomNavigationBar extends StatelessWidget {
       showSelectedLabels: false,
       showUnselectedLabels: false,
       items: [
-        BottomNavigationBarItem(icon: Icon(Icons.pin_drop), title: Text('')),
-        BottomNavigationBarItem(
-            icon: Icon(Icons.add_location), title: Text('')),
-        BottomNavigationBarItem(
-            icon: Icon(Icons.person_outline), title: Text('')),
+        BottomNavigationBarItem(icon: Icon(Icons.pin_drop), label: ''),
+        BottomNavigationBarItem(icon: Icon(Icons.add_location), label: ''),
+        BottomNavigationBarItem(icon: Icon(Icons.person_outline), label: ''),
       ],
     );
   }
